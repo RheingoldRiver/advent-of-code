@@ -2,8 +2,6 @@ import re
 
 
 class Solver:
-    colors = ['red', 'blue', 'green']
-    color_pattern = '(\d+) {}'
 
     def __init__(self):
         with open('input.txt', 'r', encoding='utf-8') as f:
