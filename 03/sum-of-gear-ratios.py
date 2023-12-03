@@ -87,7 +87,6 @@ class Solver:
     def is_symbol(char: str) -> bool:
         return re.match(r'[\d\\.\s]', char) is None
 
-
     @staticmethod
     def is_digit(char: str) -> bool:
         return re.match(r'\d', char) is not None
