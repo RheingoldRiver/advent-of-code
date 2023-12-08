@@ -1,7 +1,5 @@
 import json
 import math
-import re
-import numpy as np
 
 
 class Solver:
@@ -41,7 +39,7 @@ class Solver:
                 break
         print(prime_factors)
 
-        return np.lcm.reduce(prime_factors)
+        return math.lcm(*prime_factors)
 
 
 if __name__ == '__main__':
