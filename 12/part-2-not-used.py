@@ -66,7 +66,6 @@ class Solver:
         for x in range(0, len(subset)):
             for y in range(0, len(what_to_put_here)):
                 cur_total = 0
-                if 
                 return self.count_subset(subset[:x], what_to_put_here[:y]) + self.count_subset(subset[x:], what_to_put_here[:y]) + self.count_subset(subset[:x], what_to_put_here[y:]) + self.count_subset(subset[x:], what_to_put_here[y:])
 
     def bruteforce(self, subset, what_to_put_here):
