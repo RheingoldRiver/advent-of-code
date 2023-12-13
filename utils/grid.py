@@ -151,6 +151,14 @@ class Grid:
             raise ValueError("requested column with index > width")
         return [(deepcopy(row[idx]) if as_copy else row[idx]) for row in self.grid]
 
+    def all_rows(self, as_copy: bool = True):
+        for idx in range(len(self.grid)):
+            yield self.row_at(idx, as_copy)
+
+    def all_columns(self, as_copy: bool = True):
+        for idx in range(len(self.grid[0])):
+            yield self.col_at(idx, as_copy)
+
     def all_grid_cells(self) -> Generator[Cell, None, None]:
         for i, row in enumerate(self.grid):
             for j, cell in enumerate(row):
