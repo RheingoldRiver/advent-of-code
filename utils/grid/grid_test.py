@@ -1,6 +1,7 @@
 import pytest
 
-from utils.grid import Grid, MoveError, Cell
+from utils.grid.grid import Grid
+from utils.grid.errors import MoveError
 
 
 def test_can_move():

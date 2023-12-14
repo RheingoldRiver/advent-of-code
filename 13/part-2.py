@@ -1,8 +1,6 @@
-import json
-import re
-from copy import copy, deepcopy
+from copy import copy
 
-from utils.grid import Grid
+from utils.grid.grid import Grid
 
 
 class Solver:
