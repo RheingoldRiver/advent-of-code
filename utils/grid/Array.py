@@ -23,6 +23,14 @@ class Array:
         return self.array[key]
 
     @property
+    def max_val(self):
+        return len(self) - 1
+
+    def reversed(self):
+        for i in range(len(self)):
+            yield self.array[self.max_val - i]
+
+    @property
     def min_index(self):
         return 0
 
@@ -38,3 +46,14 @@ class Array:
 
         return _generate_splits(self.array, tuple(), num_pieces)
 
+    def string_and_split(self, char):
+        return str(self).split(char)
+
+    def total_weight(self):
+        return sum([x.weight for x in self.array])
+
+    def overwrite_values(self, new_values):
+        if len(new_values) != len(self):
+            raise ValueError
+        for i, x in enumerate(new_values):
+            self.array[i].set_value(x)

@@ -4,3 +4,7 @@ class PeekError(ValueError):
 
 class MoveError(ValueError):
     pass
+
+
+class CellNeedsWeightError(ValueError):
+    pass

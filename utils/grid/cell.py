@@ -1,3 +1,6 @@
+from utils.grid.errors import CellNeedsWeightError
+
+
 class Cell:
     def __init__(self, row: int, col: int, data=None):
         self.row = row
@@ -16,3 +19,15 @@ class Cell:
 
     def set_value(self, val):
         self.data['value'] = val
+
+    @property
+    def weight(self):
+        if (w := self.data.get('weight')) is not None:
+            return w
+        raise CellNeedsWeightError
+
+    def set_weight(self, val):
+        if type(val) is str:
+            if val.isdigit() or val[0] == '-' and val[1:].isdigit():
+                val = int(val)
+        self.data['weight'] = val
