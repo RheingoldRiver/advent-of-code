@@ -1,3 +1,4 @@
+from copy import deepcopy
 from typing import Optional, TYPE_CHECKING
 
 from utils.grid.errors import PeekError, MoveError
@@ -8,13 +9,17 @@ if TYPE_CHECKING:
 
 
 class Pointer:
-    def __init__(self, grid: "Grid", idx):
+    def __init__(self, grid: "Grid", idx, data=None):
         self.grid = grid
         self.row = 0
         self.col = 0
         self.id = idx
+        self._ptr_data = data or {}
 
     def __str__(self):
+        return f"<Ptr {self.id} at row {self.row} col {self.col}>"
+
+    def __repr__(self):
         return f"<Ptr {self.id} at row {self.row} col {self.col}>"
 
     @property
@@ -25,6 +30,21 @@ class Pointer:
     def data(self):
         """Returns the full data dictionary at a cell, which may contain extra values."""
         return self.grid.data_at(self.row, self.col)
+
+    @property
+    def ptr_data(self):
+        return self._ptr_data
+
+    def set_ptr_data(self, new_data):
+        self._ptr_data = new_data
+
+    def update_ptr_data(self, new_data):
+        self._ptr_data.update(new_data)
+
+    def clone(self):
+        new_ptr = self.grid.new_pointer(self.id + '2', deepcopy(self.ptr_data))
+        new_ptr.move_to(self.row, self.col)
+        return new_ptr
 
     @property
     def value(self):

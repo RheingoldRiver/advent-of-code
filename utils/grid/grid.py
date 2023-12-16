@@ -44,10 +44,10 @@ class Grid:
 
         return '\n'.join([''.join([char(i, j) for j, c in enumerate(row)]) for i, row in enumerate(self.grid)])
 
-    def new_pointer(self, key: str = None):
+    def new_pointer(self, key: str = None, data=None):
         if key is None:
             key = f"pointer{str(len(self.pointers.keys()))}"
-        ptr = Pointer(self, key)
+        ptr = Pointer(self, key, data)
         self.pointers[key] = ptr
         return ptr
 
