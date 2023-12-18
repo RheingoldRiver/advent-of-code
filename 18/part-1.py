@@ -49,13 +49,10 @@ class Solver:
                 for x in range(steps):
                     pointer.move_left(1)
                     pointer.update_value('#')
-        print(str(grid))
 
         pathfinder = grid.new_pointer()
         start_at = self.starting_pos_actual
         queue = [start_at]
-
-        grid.update_indices()
 
         # for cell in grid.all_grid_cells():
         #     print(cell.row, cell.col, cell.value)
@@ -68,7 +65,6 @@ class Solver:
                     continue
                 cell.set_value('X')
                 queue.append(cell)
-
 
         total = 0
         for cell in grid.grid_cells_matching(lambda x: x.value == 'X' or x.value == '#'):

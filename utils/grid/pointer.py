@@ -185,12 +185,6 @@ class Pointer:
         else:
             return None
 
-    def update_indices_on_insert(self, min_row: Optional[int] = None, min_col: Optional[int] = None):
-        for i in range(min_row or 0, self.grid.height):
-            for j in range(min_col or 0, self.grid.width):
-                self.grid.cell_at(i, j).row = i
-                self.grid.cell_at(i, j).col = j
-
     def move_right(self, steps: int = 1, wrap: bool = False):
         if (new_col := self.coord_right(steps, wrap)) is not None:
             self.col = new_col
@@ -221,7 +215,7 @@ class Pointer:
                         'value': self.grid.default_infinite_value
                     }))
             if self.grid.infinite_update_indices:
-                self.update_indices_on_insert()
+                self.grid.update_indices()
             self.col = self.grid.min_col
             for idx, ptr in self.grid.pointers.items():
                 if idx != self.id:
@@ -247,7 +241,7 @@ class Pointer:
                     {'value': self.grid.default_infinite_value}) for j in range(self.grid.width)]
                 self.grid.grid.insert(0, new_row)
             if self.grid.infinite_update_indices:
-                self.update_indices_on_insert()
+                self.grid.update_indices()
             self.row = self.grid.min_row
             for idx, ptr in self.grid.pointers.items():
                 if idx != self.id:
@@ -267,7 +261,7 @@ class Pointer:
         elif self.grid.is_infinite:
             for _ in range(steps - (self.grid.max_row - self.row)):
                 new_row = [Cell(
-                    0,
+                    self.grid.max_row + 1,
                     j,
                     {'value': self.grid.default_infinite_value}) for j in range(self.grid.width)]
                 self.grid.grid.append(new_row)
