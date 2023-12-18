@@ -88,14 +88,14 @@ class Grid:
         self.data_at(row, col).update({'value': value})
 
     @classmethod
-    def read_from_lines(cls, lines) -> "Grid":
+    def read_from_lines(cls, lines, ints: bool = False) -> "Grid":
         grid = []
         for i, row in enumerate(lines):
             new_row = []
             grid.append(new_row)
             for j, cell in enumerate(row):
                 new_row.append(Cell(i, j, {
-                    'value': cell
+                    'value': int(cell) if ints else cell
                 }))
         return cls(grid)
 

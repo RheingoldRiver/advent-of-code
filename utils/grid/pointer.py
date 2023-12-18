@@ -8,7 +8,26 @@ if TYPE_CHECKING:
     from grid import Grid
 
 
+class Direction:
+    left = 'LEFT',
+    right = 'RIGHT',
+    up = 'UP',
+    down = 'DOWN'
+
+    @staticmethod
+    def opposite(direction: "Direction"):
+        if direction == Direction.left:
+            return Direction.right
+        if direction == Direction.right:
+            return Direction.left
+        if direction == Direction.up:
+            return Direction.down
+        if direction == Direction.down:
+            return Direction.up
+
+
 class Pointer:
+
     def __init__(self, grid: "Grid", idx, data=None):
         self.grid = grid
         self.row = 0
@@ -83,6 +102,16 @@ class Pointer:
     def move_to(self, row, col):
         self.col = col
         self.row = row
+
+    def can_move_in_direction(self, direction, steps: int = 1):
+        if direction == Direction.left:
+            return self.can_move_left(steps)
+        if direction == Direction.right:
+            return self.can_move_right(steps)
+        if direction == Direction.up:
+            return self.can_move_up(steps)
+        if direction == Direction.down:
+            return self.can_move_down(steps)
 
     def can_move_right(self, steps: int = 1):
         return self.col <= self.grid.width - 1 - steps
