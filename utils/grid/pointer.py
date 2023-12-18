@@ -367,13 +367,13 @@ class Pointer:
 
     def current_neighbors(self, steps: int = 1, wrap: bool = False):
         ret = []
-        if self.can_move_down():
+        if self.can_move_down(steps):
             ret.append(self.peek_down(steps, wrap))
-        if self.can_move_up():
+        if self.can_move_up(steps):
             ret.append(self.peek_up(steps, wrap))
-        if self.can_move_left():
+        if self.can_move_left(steps):
             ret.append(self.peek_left(steps, wrap))
-        if self.can_move_right():
+        if self.can_move_right(steps):
             ret.append(self.peek_right(steps, wrap))
         return ret
 

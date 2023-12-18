@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Generator, List
+from typing import Generator, List, Optional
 
 from utils.grid.Array import Array
 from utils.grid.cell import Cell
@@ -55,6 +55,12 @@ class Grid:
         self.is_infinite = True
         self.default_infinite_value = default_value
         self.infinite_update_indices = update_indices
+
+    def update_indices(self, min_row: Optional[int] = None, min_col: Optional[int] = None):
+        for i in range(min_row or 0, self.height):
+            for j in range(min_col or 0, self.width):
+                self.cell_at(i, j).row = i
+                self.cell_at(i, j).col = j
 
     @property
     def width(self):
