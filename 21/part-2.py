@@ -26,7 +26,7 @@ class Solver:
             next_queue = []
             found_cells = []
             for ptr in queue:
-                for cell in ptr.current_neighbors(wrap=True):
+                for cell in ptr.current_neighbors():
                     if cell.value == '#':
                         continue
                     if cell in found_cells:

@@ -103,6 +103,13 @@ class Pointer:
         self.col = col
         self.row = row
 
+    def move_to_value(self, val):
+        for cell in self.grid.all_grid_cells():
+            if cell.value == val:
+                self.move_to(cell.row, cell.col)
+                return
+        raise ValueError(f'No cell matches `{val}`')
+
     def can_move_in_direction(self, direction, steps: int = 1):
         if direction == Direction.left:
             return self.can_move_left(steps)
