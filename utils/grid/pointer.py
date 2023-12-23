@@ -103,6 +103,10 @@ class Pointer:
         self.col = col
         self.row = row
 
+    def move_to_cell(self, cell: Cell):
+        self.col = cell.col
+        self.row = cell.row
+
     def move_to_value(self, val):
         for cell in self.grid.all_grid_cells():
             if cell.value == val:
@@ -366,16 +370,24 @@ class Pointer:
         elif not self.can_move_down(steps_down):
             raise MoveError("Cannot move down!")
 
-    def current_neighbors(self, steps: int = 1, wrap: bool = False):
+    def current_neighbors(self, steps: int = 1, wrap: bool = False, wall: str = 'XXXXXXXXXXXXXXX'):
         ret = []
         if self.can_move_down(steps):
-            ret.append(self.peek_down(steps, wrap))
+            next_cell = self.peek_down(steps, wrap)
+            if next_cell.value != wall:
+                ret.append(next_cell)
         if self.can_move_up(steps):
-            ret.append(self.peek_up(steps, wrap))
+            next_cell = self.peek_up(steps, wrap)
+            if next_cell.value != wall:
+                ret.append(next_cell)
         if self.can_move_left(steps):
-            ret.append(self.peek_left(steps, wrap))
+            next_cell = self.peek_left(steps, wrap)
+            if next_cell.value != wall:
+                ret.append(next_cell)
         if self.can_move_right(steps):
-            ret.append(self.peek_right(steps, wrap))
+            next_cell = self.peek_right(steps, wrap)
+            if next_cell.value != wall:
+                ret.append(next_cell)
         return ret
 
     def current_diagonal_neighbors(self, steps_vertical: int = 1, steps_horitzontal: int = 1, wrap: bool = False):
